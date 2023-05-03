@@ -1,0 +1,11 @@
+ping command
+ansible -i hosts all -m ping
+
+create file command
+ansible -i hosts all -m copy -a “dest=/home/vagrant/toto.txt content=’bonjour eazytraining'”
+
+setup command
+ansible -i hosts all -m setup
+
+Calling an variable
+ansible -i inventory client1 -m copy -a "dest=/home/vagrant/toto.txt content='Bonjour Abdel-had et bienvenu en {{ env }}'"
