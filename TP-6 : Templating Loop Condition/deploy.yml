@@ -4,7 +4,7 @@
   become: yes
   vars:
     docker_host: "unix://var/run/docker.sock"
-
+ 
   pre_tasks:
   # Installation de plusieurs paquets sur CentOS
     - name: Install some packages
