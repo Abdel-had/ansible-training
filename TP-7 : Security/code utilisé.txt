@@ -3,3 +3,7 @@ ansible-vault encrypt "/home/vagrant/ansible-training/TP-7 : Security/files/secr
 ansible-vault decrypt "/home/vagrant/ansible-training/TP-7 : Security/files/secrets/credentials.yml"
 
 ansible-playbook -i hosts --ask-vault-pass deploy.yml
+
+ssh-copy-id vagrant@192.168.99.11
+
+ssh-copy-id vagrant@192.168.99.12
