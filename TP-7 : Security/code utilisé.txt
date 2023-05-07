@@ -1,3 +1,5 @@
 ansible-vault encrypt "/home/vagrant/ansible-training/TP-7 : Security/files/secrets/credentials.yml"
 
 ansible-vault decrypt "/home/vagrant/ansible-training/TP-7 : Security/files/secrets/credentials.yml"
+
+ansible-playbook -i hosts --ask-vault-pass deploy.yml
