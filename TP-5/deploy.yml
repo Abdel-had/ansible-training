@@ -1,0 +1,65 @@
+---
+- name: "Apache installation using docker"
+  hosts: prod
+  become: yes
+  vars:
+    docker_host: "unix://var/run/docker.sock"
+
+  pre_tasks:
+    - name: Install EPEL repo
+      when: ansible_distribution == "CentOS"
+      package:
+        name: epel-release
+        state: present
+
+    - name: download pip script
+      get_url:
+        url: https://bootstrap.pypa.io/pip/2.7/get-pip.py
+        dest: /tmp/get-pip.py
+
+    - name: install python-pip
+      command: python2.7 /tmp/get-pip.py
+
+    - name: Create symlink for pip
+      command: ln -s /usr/local/bin/pip /usr/bin/pip
+      args:
+        creates: /usr/bin/pip
+
+    - name: Install docker python
+      pip:
+        name: docker-py
+
+    - name: Install Docker dependencies
+      ansible.builtin.yum:
+        name:
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
+        state: present
+
+    - name: Add Docker repo
+      ansible.builtin.yum_repository:
+        name: docker-ce-stable
+        description: Docker CE Stable - $basearch
+        baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+        gpgcheck: yes
+        gpgkey: https://download.docker.com/linux/centos/gpg
+
+    - name: Install Docker
+      ansible.builtin.yum:
+        name: docker-ce
+        state: present
+
+    - name: Start Docker service
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+  tasks:
+    - name: "Create Apache container"
+      docker_container:
+        name: webapp
+        image: httpd
+        ports:
+          - "80:80"
