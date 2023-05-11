@@ -1,0 +1,20 @@
+# Récupérer tous les rôles qui sont dans le fichiers requirements.yml
+ansible-galaxy install -r roles/requirements.yml
+
+OUTPUT
+```
+Starting galaxy role install process
+- extracting ansible-role-containerized-wordpress to /home/vagrant/.ansible/roles/ansible-role-containerized-wordpress
+- ansible-role-containerized-wordpress was installed successfully
+```
+# Le nom du rôle est ansible-role-containerized-wordpress
+
+
+# installation de docker-compose 1.29.2 sur client1 et client2
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo chmod +x /usr/local/bin/docker-compose
+  sudo cp /usr/local/bin/docker-compose /bin/docker-compose
+  sudo chmod +x /bin/docker-compose
+
+# Lancer le playbook
+ansible-playbook -i hosts --ask-vault-pass wordpress.yml
