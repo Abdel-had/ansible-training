@@ -91,3 +91,20 @@
           - "8080:80"
         volumes:
           - /home/vagrant/index.html:/usr/local/apache2/htdocs/index.html
+
+    # Test d'accessibilité du site
+    - name: Waiting for all containers to start up and website to be accessible
+      wait_for:
+        host: localhost
+        port: 8080
+        timeout: 180
+      register: host_accessible
+      failed_when: False
+
+    - debug:
+        msg: "Site is reachable"
+      when: host_accessible.state is defined and host_accessible.state == "started"
+
+    - debug:
+        msg: "Site is NOT reachable"
+      when: host_accessible.state is defined and host_accessible.state == "stopped"
