@@ -1,4 +1,6 @@
 ---
 ansible_user: vagrant
-ansible_password: "{{ vault_ansible_password }}"
 env: production
+
+# replaced by rsa key authentication
+# ansible_password: "{{ vault_ansible_password }}"

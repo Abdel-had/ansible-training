@@ -4,8 +4,10 @@
   become: yes
   vars_files:
     - files/secrets/credentials.yml
-  vars:
-    docker_host: "unix://var/run/docker.sock"
+  
+  # replaced by rsa key authentication
+  #vars:
+  #  docker_host: "unix://var/run/docker.sock"
 
   pre_tasks:
   # Installation de plusieurs paquets sur CentOS
