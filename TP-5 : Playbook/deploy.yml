@@ -26,6 +26,7 @@
     # Création d'un lien symbolique pour pip
     - name: Create a symbolic link for pip
       file:
+        force: yes
         src: /usr/local/bin/pip
         dest: /usr/bin/pip
         state: link
@@ -73,4 +74,4 @@
         name: webapp
         image: httpd
         ports:
-          - "80:80"
+          - "8080:80"
