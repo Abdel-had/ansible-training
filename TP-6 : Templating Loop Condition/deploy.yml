@@ -28,10 +28,12 @@
       command: python2.7 /tmp/get-pip.py
 
     # Création d'un lien symbolique pour pip
-    - name: Create symlink for pip
-      command: ln -s /usr/local/bin/pip /usr/bin/pip
-      args:
-        creates: /usr/bin/pip
+    - name: Create a symbolic link for pip
+      file:
+        force: yes
+        src: /usr/local/bin/pip
+        dest: /usr/bin/pip
+        state: link
 
     # Installation du module Python Docker
     - name: Install docker python
