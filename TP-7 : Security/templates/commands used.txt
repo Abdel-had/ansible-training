@@ -1,0 +1,18 @@
+ansible-vault encrypt "/home/vagrant/ansible-training/TP-7 : Security/files/secrets/credentials.yml"
+
+ansible-vault decrypt "/home/vagrant/ansible-training/TP-7 : Security/files/secrets/credentials.yml"
+
+ansible-playbook -i hosts --ask-vault-pass deploy.yml
+
+ansible-playbook -i hosts deploy.yml
+
+```
+sudo cat << EOF >> /etc/hosts
+192.168.99.11   client1.local
+192.168.99.12   client2.local
+EOF
+```
+
+ssh-copy-id vagrant@client1.local
+ssh-copy-id vagrant@client2.local
+
