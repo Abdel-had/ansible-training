@@ -2,13 +2,11 @@
 - name: "Apache installation using docker"
   hosts: prod
   become: yes
-  vars_files:
-    - files/secrets/credentials.yml
-  
-  # replaced by rsa key authentication
-  #vars:
-  #  docker_host: "unix://var/run/docker.sock"
 
+  # replaced by rsa key authentication
+  # vars_files:
+  #   - files/secrets/credentials.yml
+  
   pre_tasks:
   # Installation de plusieurs paquets sur CentOS
     - name: Install some packages
